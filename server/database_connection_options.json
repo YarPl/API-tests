@@ -1,0 +1,33 @@
+{
+    "procollect-beta (ru)" : {
+        "host": "192.168.50.135", 
+        "port": "65432",
+        "database": "procollect_os_beta",
+        "user": "yplias",
+        "password": "8@kda01DWa"
+    },
+    
+    "procollect-test (ru)" : {
+        "host": "192.168.50.135",
+        "port": "65432",
+        "database": "procollect_test",
+        "user": "yplias",
+        "password": "8@kda01DWa"
+    },
+    
+    "cehr-test.creditorro" : {
+        "host": "157.90.247.182",
+        "port": "65432",
+        "database": "cehr_test",
+        "user": "yplias",
+        "password": "8@kda01DWa"
+    },
+
+    "creditkasa-test.creditorro" : {
+        "host": "10.89.89.12",
+        "port": "5000",
+        "database": "creditkasa_test",
+        "user": "yplias",
+        "password": "8@kda01DWa"
+    }
+}

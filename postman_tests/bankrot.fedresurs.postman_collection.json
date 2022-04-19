@@ -1,0 +1,435 @@
+{
+	"info": {
+		"_postman_id": "062636aa-bd3d-4136-a9a8-6667d66ebe95",
+		"name": "bankrot.fedresurs",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/backend/prsnbankrupts?isActiveLegalCase=null&limit={{limit}}&offset={{offset}}",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let pageDataSet      = new Set();\r",
+							"const expected_keys_in_pageData = [\"category\", \"statusUpdateDate\", \"isActive\", \"status\", \"region\", \"arbitrManagerFio\", \"address\", \"lastLegalCase\", \"guid\", \"fio\",\"ogrnip\", \"inn\", \"snils\"];\r",
+							"\r",
+							"let lastLegalCaseSet = new Set();\r",
+							"const expected_keys_in_lastLegalCase = [\"number\", \"status\"];\r",
+							"\r",
+							"let statusSet        = new Set();\r",
+							"const expected_keys_in_status = [\"code\", \"description\", \"updateDate\"];\r",
+							"\r",
+							"const pageData = pm.response.json().pageData;\r",
+							"\r",
+							"pageData.forEach((pageDataKeys) => {\r",
+							"\r",
+							"    Object.keys(pageDataKeys).forEach((key) => {\r",
+							"        pageDataSet.add(key);\r",
+							"    });\r",
+							"\r",
+							"\r",
+							"    if (pageDataKeys.lastLegalCase) {\r",
+							"        \r",
+							"        Object.keys(pageDataKeys.lastLegalCase).forEach((key) => {\r",
+							"            lastLegalCaseSet.add(key);\r",
+							"        });\r",
+							"\r",
+							"        \r",
+							"        if (pageDataKeys.lastLegalCase.status) {\r",
+							"            Object.keys(pageDataKeys.lastLegalCase.status).forEach((key) => {\r",
+							"                statusSet.add(key);\r",
+							"            });\r",
+							"        }\r",
+							"    }\r",
+							"    \r",
+							"});\r",
+							"\r",
+							"console.log(pageDataSet);\r",
+							"for (let value of pageDataSet) {\r",
+							"\r",
+							"    if (!expected_keys_in_pageData.includes(value)) console.log (\"Unexpected key in pageDataSet: \" + value);\r",
+							"\r",
+							"    pm.test(\"pageDataSet has all expected keys\", function () {\r",
+							"        pm.expect(expected_keys_in_pageData.includes(value)).to.eql(true);\r",
+							"    });\r",
+							"\r",
+							"}\r",
+							"\r",
+							"console.log(lastLegalCaseSet);\r",
+							"for (let value of lastLegalCaseSet) {\r",
+							"    if (!expected_keys_in_lastLegalCase.includes(value)) console.log (\"Unexpected key in lastLegalCaseSet: \" + value);\r",
+							"\r",
+							"    pm.test(\"lastLegalCaseSet has all expected keys\", function () {\r",
+							"        pm.expect(expected_keys_in_lastLegalCase.includes(value)).to.eql(true);\r",
+							"    });\r",
+							"}\r",
+							"\r",
+							"console.log(statusSet);\r",
+							"for (let value of statusSet) {\r",
+							"    if (!expected_keys_in_status.includes(value)) console.log (\"Unexpected key in statusSet: \" + value);\r",
+							"\r",
+							"    pm.test(\"statusSet has all expected keys\", function () {\r",
+							"        pm.expect(expected_keys_in_status.includes(value)).to.eql(true);\r",
+							"    });\r",
+							"}"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "authority",
+						"value": "bankrot.fedresurs.ru",
+						"disabled": true
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache",
+						"disabled": true
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\"",
+						"disabled": true
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*",
+						"disabled": true
+					},
+					{
+						"key": "dnt",
+						"value": "1",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"disabled": true
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"disabled": true
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin",
+						"disabled": true
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors",
+						"disabled": true
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty",
+						"disabled": true
+					},
+					{
+						"key": "referer",
+						"value": "https://bankrot.fedresurs.ru/bankrupts?regionId=all&isActiveLegalCase=null&offset=0&limit=15"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,hr;q=0.9,uk;q=0.8,hu;q=0.7,de;q=0.6,en-US;q=0.5,en-IN;q=0.4,en;q=0.3,ru-RU;q=0.2",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://bankrot.fedresurs.ru/backend/prsnbankrupts?limit={{limit}}&offset={{offset}}",
+					"protocol": "https",
+					"host": [
+						"bankrot",
+						"fedresurs",
+						"ru"
+					],
+					"path": [
+						"backend",
+						"prsnbankrupts"
+					],
+					"query": [
+						{
+							"key": "isActiveLegalCase",
+							"value": "null",
+							"disabled": true
+						},
+						{
+							"key": "limit",
+							"value": "{{limit}}"
+						},
+						{
+							"key": "offset",
+							"value": "{{offset}}"
+						}
+					]
+				}
+			},
+			"response": [
+				{
+					"name": "https://bankrot.fedresurs.ru/backend/prsnbankrupts?isActiveLegalCase=null&limit=15&offset=45",
+					"originalRequest": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "authority",
+								"value": "bankrot.fedresurs.ru"
+							},
+							{
+								"key": "pragma",
+								"value": "no-cache"
+							},
+							{
+								"key": "cache-control",
+								"value": "no-cache"
+							},
+							{
+								"key": "sec-ch-ua",
+								"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\""
+							},
+							{
+								"key": "accept",
+								"value": "application/json, text/plain, */*"
+							},
+							{
+								"key": "dnt",
+								"value": "1"
+							},
+							{
+								"key": "sec-ch-ua-mobile",
+								"value": "?0"
+							},
+							{
+								"key": "user-agent",
+								"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36"
+							},
+							{
+								"key": "sec-ch-ua-platform",
+								"value": "\"Windows\""
+							},
+							{
+								"key": "sec-fetch-site",
+								"value": "same-origin"
+							},
+							{
+								"key": "sec-fetch-mode",
+								"value": "cors"
+							},
+							{
+								"key": "sec-fetch-dest",
+								"value": "empty"
+							},
+							{
+								"key": "referer",
+								"value": "https://bankrot.fedresurs.ru/bankrupts?regionId=all&isActiveLegalCase=null&offset=0&limit=15"
+							},
+							{
+								"key": "accept-language",
+								"value": "ru,hr;q=0.9,uk;q=0.8,hu;q=0.7,de;q=0.6,en-US;q=0.5,en-IN;q=0.4,en;q=0.3,ru-RU;q=0.2"
+							}
+						],
+						"url": {
+							"raw": "https://bankrot.fedresurs.ru/backend/prsnbankrupts?limit=15&offset=0",
+							"protocol": "https",
+							"host": [
+								"bankrot",
+								"fedresurs",
+								"ru"
+							],
+							"path": [
+								"backend",
+								"prsnbankrupts"
+							],
+							"query": [
+								{
+									"key": "isActiveLegalCase",
+									"value": "null",
+									"disabled": true
+								},
+								{
+									"key": "limit",
+									"value": "15"
+								},
+								{
+									"key": "offset",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"status": "OK",
+					"code": 200,
+					"_postman_previewlanguage": "json",
+					"header": [
+						{
+							"key": "Server",
+							"value": "nginx"
+						},
+						{
+							"key": "Date",
+							"value": "Mon, 06 Dec 2021 20:31:13 GMT"
+						},
+						{
+							"key": "Content-Type",
+							"value": "application/json; charset=utf-8"
+						},
+						{
+							"key": "Transfer-Encoding",
+							"value": "chunked"
+						},
+						{
+							"key": "Connection",
+							"value": "keep-alive"
+						},
+						{
+							"key": "Vary",
+							"value": "Accept-Encoding"
+						},
+						{
+							"key": "X-Powered-By",
+							"value": "ASP.NET"
+						},
+						{
+							"key": "Strict-Transport-Security",
+							"value": "max-age=7776000"
+						},
+						{
+							"key": "X-Content-Type-Options",
+							"value": "nosniff"
+						},
+						{
+							"key": "X-Frame-Options",
+							"value": "SAMEORIGIN"
+						},
+						{
+							"key": "X-XSS-Protection",
+							"value": "1; mode=block"
+						},
+						{
+							"key": "Content-Encoding",
+							"value": "gzip"
+						}
+					],
+					"cookie": [],
+					"body": "{\n    \"category\" : \"\",\n    \"statusUpdateDate\" : \"2015-01-12T00:00:00\",\n    \"isActive\" : \"\",\n    \"status\" : \"\",\n    \"region\" : \"\",\n    \"arbitrManagerFio\" : \"Арбитражный управляющий\",\n    \"address\" : \"Место проживания\",\n    \"lastLegalCase\" : \"vide infra\",\n    \"guid\" : \"\",\n    \"fio\" : \"Ф.И.О.\",\n    \"ogrnip\" : \"ОГРНИП\",\n    \"inn\" : \"ИНН\",\n    \"snils\" : \"СНИЛС\"\n}\n\n{\n    \"number\" : \"Номер судебного дела\",\n    \"status\" : \"vide infra\"\n}\n\n{\n    \"code\" : \"LegalCode\",\n    \"description\" : \"LegalStatus\",\n    \"updateDate\" : \"2021-11-22T23:37:59.56\"\n}"
+				}
+			]
+		},
+		{
+			"name": "/backend/persons/{{guid}}",
+			"request": {
+				"method": "GET",
+				"header": [
+					{
+						"key": "sec-ch-ua",
+						"value": "\" Not A;Brand\";v=\"99\", \"Chromium\";v=\"96\", \"Google Chrome\";v=\"96\"",
+						"disabled": true
+					},
+					{
+						"key": "Pragma",
+						"value": "no-cache",
+						"disabled": true
+					},
+					{
+						"key": "DNT",
+						"value": "1",
+						"disabled": true
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0",
+						"disabled": true
+					},
+					{
+						"key": "User-Agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/96.0.4664.45 Safari/537.36",
+						"disabled": true
+					},
+					{
+						"key": "Accept",
+						"value": "application/json, text/plain, */*",
+						"disabled": true
+					},
+					{
+						"key": "Cache-Control",
+						"value": "no-cache",
+						"disabled": true
+					},
+					{
+						"key": "Referer",
+						"value": "https://fedresurs.ru/person/3374b90d-9a1e-474b-ae68-fb56fd67761f"
+					},
+					{
+						"key": "sec-ch-ua-platform",
+						"value": "\"Windows\"",
+						"disabled": true
+					}
+				],
+				"url": {
+					"raw": "https://fedresurs.ru/backend/persons/{{guid}}",
+					"protocol": "https",
+					"host": [
+						"fedresurs",
+						"ru"
+					],
+					"path": [
+						"backend",
+						"persons",
+						"{{guid}}"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "limit",
+			"value": "15"
+		},
+		{
+			"key": "offset",
+			"value": "0"
+		},
+		{
+			"key": "guid",
+			"value": "477da63f-8cc3-42b2-a8b1-c98301f345b8"
+		}
+	]
+}

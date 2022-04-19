@@ -1,0 +1,49 @@
+{
+	"info": {
+		"_postman_id": "d44b3a43-1c21-4740-9a04-4743f3d82795",
+		"name": "gosuslugi",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/admin/import-fssp-list",
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiIyIiwianRpIjoiZDA3ZGZhNDZhMjY0NWU0ZThmOTIzMjdiODY2NzNkOTU2NGI5ODE5M2VhNjUzYTdhNTdiNGUyOWQwNDVlYjdlYjk0MjZkNmFlM2MyNjdhNmEiLCJpYXQiOjE2Mzg3NzI2NTYuNDk2MywibmJmIjoxNjM4NzcyNjU2LjQ5NjMsImV4cCI6MTYzODgyMzA1Ni40NTcsInN1YiI6IjExNTI0Iiwic2NvcGVzIjpbXX0.ScGBx9U-NEbhdTl7UzRK8pu0IaYsleL4HRcOUkgbdGyBkcwaGdBRxQ_JSaELkosc46ppZb-Ow78nP5jkSnmlzgOoKh4gruQ9sA62mWc6AbPIMTtN71ybRoVimw1hbsKYVEwUaHtU2DUaCFgUtlgZevbiLsWq-sQ518h5x5UU_t_ntBbLS5IOh92RxbbZLrTvNpMEYngKGbaoY6x8DiTTk4j3JFRllZ4cr6toeMybkD1d35hAnVWOfxkJyavnSnFaaR5WVrpXqT4Klt2bHy3kXZpbfydXszaMWy_0DmayQKMvzwTTGZuRQDToov6JdXI5KkB6sSclU6mCrqK0WWfwLkuO8UjSc8ybUU7Xrp59FM-cRoLwniaIy29W_dhLcIRDsAevEAafi3BFGR8ycBbyzYdWJzKrRBNGpNG6JkKDnofar2A44Q3AqWi2ktV7dEYWOAjjHauarXb0b6fFB8PYxPWdNUfLoXTJ1gDBcfMqtHBdCNz3hnZY5Q_BfSvLanuA6gVEpxHDjmjWx44xf8-W6hJ-N9JqnJtx6pXDmu3o8bkbfXOSyQPvpdw_Bmcehau9L8L3LjM3NkenOhTGgVXRdSr_hadJ_G82R_EBmOErIJT2vLnj71P67gfTrNMZwPbdg59R5Dr3fuDjEH_bUbd6n_pO_0oFs8bNuoiLB5i9_gw"
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "cookie",
+						"value": "VouchCookie=H4sIAAAAAAAA_6SWz46zOhbE32iEIURflkOCCaRtGmMfgzdXBuc2AUPcHbohefpR8l1p_mlWswbp2K6qX53zPeuapL3klywVjxTRS3pLJxa2-3SbDq6Cfbb72_meodaHezPiWZXpNp1s1467R5Ng_22KblriR5HQu5LMmQQ27TGzbUC-jYwvb_vsoStm23u6lffs3gaqb_z1piT1tNx9v00ZSq13SweK2oD9NILeamnn5__neza14w61R3LJ7e3C0O5djcrVvnjQHv4sKvB0At8msX1dMav2mfmzXC4ixn3tw6NF7Ef78J3214uq7KkdcSWkfdfCbgExSoV35zyiYF3IeyzFmC45RIrEbhFAlrNkMbORgKQ7QTWsGsNRHzMLsQvEGF41zm5iUJmujJNgNs1gPxvfQhOjkFumtFTsbYSw7DMtY-u473Dr2bk9RJ3wBr-UcwJinZlVAjgwSG6rtvFdDJmAIXN8gOksvBUm1TEOASDQ4IW15JFqjhHmg0DEQ18mcYoghSWPvrRYD-UU9cRDjvv21PgsFZPpz-PO54dsIGDrcpxJI8JQWlO2CTtCz_oydrf6QamB4Z5XjJDeXhXuysZDLpezBuSuCpsNia0zvlUSq69Suh8Nti6m6F3zzpeDkQ3YGiY6FJ59lBLddMIOJVcUsN1yjz3PJfQjeheBcdJ2V-PZzybocj14Hp9cT0QoBAdSeO6zBsO02LmyMhcyiJVbdm2TTBTWVGzsQvDU_pzQT9GzXIvnvFC22D3nZXrAgcJMtiPMRO4GSJgUoBbAIGBgeZm091LaQEty55PJ9BRdSomkwbZqjvSlae11J2Pd3BypFq_7eKFBrqJVpAvPDTymp_PIqvLlqSuS0J3MSO7npBs0h6AezE0nZClG1zegvmroyiaBtJislnG45UkodWy_yT68qYAEeTWgHIaH8NnhnPxCPIGUVNcAxG4DPr2Kyl2UxVcqWcX6zrHR5iKxbxyyfS3ZxdgdhQN4AHig_OPRcOuJgcXwyCix7gA-zJDARtqP5WzxprDsswmc0P5MtNx59WTjRoQ-kXbVcbxQ2X2SoAiaCZcqmUmDikUf2gUsDLzPlODs2iJ447gjrCr8JmCREruK8a5Sd-Q3Ez0WHgODorkY5q_Cdhp469MjEOGhSo3gJESoHNZOJqjXVerrZO0a0b23fjET6L7EsLvlvECMG6a5Xeox3WjY_ZBDNuQyjLUfb-ogSg3GpcIfoQlSrzx8rGqKKuq5n_LAFvGwuZ7IyoesZlNEFO_ubYBVw9WJHeijHOeAyx2ScbcnuPsxsToqb32XE9VwVDPxw60cP0KBcMJ7MbfxuuWB2tZV5pXW5I01YyHZpxEv3hWlZKLxZ9tc0m36zP-UdYDwM4_Z2RrBOVAyeAsHpc9is4LNLuRgC8mjU4sxJ0c7sFgVgNm1tBAS2QHzu7sCdjIo-9ZJVzY4S17-BVudkzDT486BXOlZhEJKO4oytGfhtgqb7K8M0RKLteZ0MQlOgVMJQnXAMSaAt__MkId0klXw8rTT_-ZpkbHfnqZhWdGsAeVJMLfWe3HPgqfCuqd5i2wtK-hZ0C0SuryA4VGOq2b-srwy79MZJtefuVgl0Kz17Lcc116LwedAAy1xzSf3ulMtupIkNOVckTO33wqb5AzuQOX_yhTKzZjxvFJK4nqpBcuMdUcY0ZNZDxW_5s2sx7p4MdjtjbUCOH5n_upxobQEk5bWQhmrkA_dRIYX8zrw6uXJvHMcfnLO8vNINxwxRp_MHVdbxvjFeDKgrXrQ_GzFygf29R_MvzGxzmKK2HnY-DWYpcH1yvvMMv6BlFC6kZlU8WrBXxX3uhtYeuNTx_Qjvivc7Rl2tZxMTsBuasuiF_PH7vK7Y9aHljRVyZw1h-g3g336FxMzXwIr6cg-1TG66NFswA81l-ndHOBfmEjTp14NqLD2kdTo4wGT0zJ2SEK7NvH_rffz_Qfmd6OKzc1gx_-rIwKbvzoCulKN-Mgm1_3WCw0lZphWjpGErYLTL4rxd5PYvIk3qJZoKcVmZdI-O-S79r2QSJpyad-bI3Wij0OB3SynSBELWz46qSyuoY86hhR6nkdbW4txfTFe2fi7Fpg3aHeqxUqZzH5Mpe6MRxcaw9jE2M_xx8KnOJCYzW3lNB-yTSFg4AK9C4FKFjgHws3tuEsKEV4Bfcw1-rVhFke1RO98dIoL45PJ9uXEaOm5nHksf-PRKef2wEejTQCoHG1eHsTCganaC-85uJHLrqofKZJ9NADH20KEBRFQiCO-ygondZDRuldYJXb7xvG1QXRbHhiilTppjNfSwlaNYVRIdyzFuiqEsxJnfY2yrvY2oR7wsYwzOB_xW5Os-ybAFR1vc5u4tzZxyfMbE-sbDJSoymbtgZ3qh8pUsruxhO6FT6M30d5Lb_Ba4bxGhnkp1EQqxs4Jzhh2rI1Z0nhzpDn0jcVfrTBjIXYH4XVIw9_XcrRVE6Og9VfK4ZdPPUYZ6qoC3FT0ptJ39NM8iFcgU4G_lmRM1za-zSSwmCLgdFzT1puj9LJcVNUtaX9daU82-SFGhBfh2z5zbUCeS7BsAuj1c-m9_3HpPrZ6weqRgQ_7yt8H-uTv3yr2RzR-tzvAcfTB49OW_CMAAP__bllXWUULAAA=",
+						"type": "text"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "[\n\"Отправлено в ведомство\"\n]\n"
+				},
+				"url": {
+					"raw": "https://procollect-rsv-02.rsvcollection.ru/api/admin/import-fssp-list",
+					"protocol": "https",
+					"host": [
+						"procollect-rsv-02",
+						"rsvcollection",
+						"ru"
+					],
+					"path": [
+						"api",
+						"admin",
+						"import-fssp-list"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

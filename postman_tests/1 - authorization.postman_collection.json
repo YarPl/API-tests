@@ -1,0 +1,313 @@
+{
+	"info": {
+		"_postman_id": "c2979c17-c7d6-4b74-864e-dd95c788c888",
+		"name": "1 - authorization",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "/api/oauth/token",
+			"event": [
+				{
+					"listen": "prerequest",
+					"script": {
+						"exec": [
+							"let origin;\r",
+							"\r",
+							"if (/\\.ru\\/.*$/s.test(pm.globals.get(\"project\"))) {\r",
+							"    origin = pm.globals.get(\"project\").replace(/\\.ru.*$/s, \".ru\");\r",
+							"    pm.environment.set(\"origin\", origin);\r",
+							"}\r",
+							"\r",
+							"if(/\\.com\\/.*$/s.test(pm.globals.get(\"project\"))) {\r",
+							"    origin = pm.globals.get(\"project\").replace(/\\.com.*$/s, \".com\");\r",
+							"    pm.environment.set(\"origin\", origin);\r",
+							"}\r",
+							"\r",
+							"\r",
+							"let referer = origin + \"/login\";\r",
+							"pm.environment.set(\"referer\", referer);\r",
+							"\r",
+							"\r",
+							"let authority = origin.replace(/^http:\\/\\/|^https:\\/\\//, \"\");\r",
+							"pm.environment.set(\"authority\", authority);\r",
+							"\r",
+							"\r",
+							"let request_url = origin;\r",
+							"pm.environment.set(\"request_url\", request_url);"
+						],
+						"type": "text/javascript"
+					}
+				},
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"const body = pm.response.json();\r",
+							"\r",
+							"const expected_keys_in_response_body = [\"token_type\", \"expires_in\", \"access_token\", \"refresh_token\", \"require_new_password\", \"has_ldap_integration\", \"username\"];\r",
+							"\r",
+							"const token_schema = {\r",
+							"\r",
+							"    \"title\": \"The security credentials for a login session\",\r",
+							"    \"required\": [\r",
+							"        \"token_type\",\r",
+							"        \"expires_in\",\r",
+							"        \"access_token\",\r",
+							"        \"refresh_token\",\r",
+							"        \"require_new_password\",\r",
+							"        \"has_ldap_integration\",\r",
+							"        \"username\"\r",
+							"    ],\r",
+							"    \"properties\": {\r",
+							"        \"token_type\": {\r",
+							"            \"title\": \"Header Prefix. Added to the Authorization header before the access token\",\r",
+							"            \"default\": \"Bearer\",\r",
+							"            \"pattern\": \"^Bearer$\",\r",
+							"            \"enum\": [\"Bearer\"],\r",
+							"            \"examples\": [\r",
+							"                \"Bearer\"\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/token_type\",\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"expires_in\": {\r",
+							"            \"title\": \"Lifetime in seconds of the Access Token\",\r",
+							"            \"default\": \"\",\r",
+							"            \"examples\": [\r",
+							"                43200\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/expires_in\",\r",
+							"            \"type\": \"integer\"\r",
+							"        },\r",
+							"        \"access_token\": {\r",
+							"            \"title\": \"Contains the security credentials for a login session and identifies the user, the user's groups, the user's privileges, and, in some cases, a particular application\",\r",
+							"            \"default\": \"\",\r",
+							"            \"pattern\": \"^(.*)$\",\r",
+							"            \"examples\": [\r",
+							"                \"eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsImp0aSI6IjFkYjk4Yzk1NzI5NDZiYWExMTM0ZjY1Y2Q1NzMyMjQzNDc1NDg4YTYzMzRmYmU3N2MzYTFhMTZjZDk2NTE0ODk3YTE1MmE0ZWM5NzNlODIzIn0.eyJhdWQiOiIyIiwianRpIjoiMWRiOThjOTU3Mjk0NmJhYTExMzRmNjVjZDU3MzIyNDM0NzU0ODhhNjMzNGZiZTc3YzNhMWExNmNkOTY1MTQ4OTdhMTUyYTRlYzk3M2U4MjMiLCJpYXQiOjE1OTcyMzg2NDAsIm5iZiI6MTU5NzIzODY0MCwiZXhwIjoxNTk3MjgxODQwLCJzdWIiOiI3MDE3Iiwic2NvcGVzIjpbXX0.ue-mmA513_YeEyXw6-atrow3eVH8UF-wVfJSX1K194upHjsl-6arf0sIDOFpgfPOm5HI-IB1TgMpgGtVOKUHD8tpIKpQ4mNGEt858B_6v4uL5Ng-k9hK_kZEUo4S_M5kmcUQnaqarMgs6fSDQ6rfklekpgBwnk6Dauwf7D-XHAUo_moq_H9TaxrJ_ClPcLhssuyao8oKK5Ug3TRCN44fqdmYBL6I6rBE8TA0HmAiTWbbJbBmPF2aEtgWgXjoDe3P0FE7HrZpGCOKcJ8EHBZG6JGaDYAcXxgFQECDdltGEvpe9N5qwoMrfuCh5e6Jj_bhIt6CxaqihOhVNGv5BQ-d9sfceWaTM5KL9WsWwxzBA5qHW4VKKuAAi5QF-uWg43VSlOSMQnuXRtc8UpLNi8SQKmiQUSEgRMbPzXMynCXu-3jst6CL2VJ6ZoM0tbK8XyjJzycVuM9p7TLbCknCkSVrszigoVWVkbpMbMyOO6ELhd5upFoVMUck9tVak-7VSXO1tG6FmG0PZsK0cetnXMqmY9FJJ1Bc2yDCFMrLRLOxHkx4W9R0-6UiYr9XV-P3Wh8jt8km9Dk4ZpFKC_kZwIOujxDoALSWCC19BRq2EfcLtBBFOmn6IMUmpAMobyOZ5hbihSAano-J1UUXXw2p5tYFxJ0qct3GtFNrwj25m49VhiY\"\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/access_token\",\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"refresh_token\": {\r",
+							"            \"title\": \"The credentials that can be used to acquire new access tokens\",\r",
+							"            \"default\": \"\",\r",
+							"            \"pattern\": \"^(.*)$\",\r",
+							"            \"examples\": [\r",
+							"                \"def502002469fb49c8bda92a7bc0a147cee4bfd366d8a136f80a8129a355778cf2cdf5c7bbbbdf084614dc99929112559d66ba04c901297f4b679a9c61f53948491af637b1701def3ca36e2f4cc8073522630781e65b2b5278cf6de30925d610e0f1b7b92903e1d7ebfad31f8fa066becf310b6a86ac18e21a786bbcd61300115cde593596cc2e6775fe9954feb9abcf2865325a33baac16f9170eb5f1f3a2120b250cff171f910776e6be48ec7b840c09da2ad6622b6cf785bcde9665913df2ed624e64ca6ef5989120d33e6643c7b1afd4c6c6aa75cd188b4ae363ba23fbb2d538eb870aa41ba769bcaaf45b244359bbc2d9da59b4ba4752d61e142db089d6ea11ca567f12e7a33c65b34f69cc4aa3f5d85cbf8a43ed85892ef31f41d6954df96a345a866b8deff5d381fa830a2ffc242110e8312f0450d4b6feb70575177ad08e8336e4ebb3fcf356c52245e973767b62a138da7e9e92d0dbf29eefbe495e45a33452\"\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/refresh_token\",\r",
+							"            \"type\": \"string\"\r",
+							"        },\r",
+							"        \"require_new_password\": {\r",
+							"            \"title\": \"A one-time password generated or not\",\r",
+							"            \"default\": false,\r",
+							"            \"enum\": [false, true],\r",
+							"            \"examples\": [\r",
+							"                false\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/require_new_password\",\r",
+							"            \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"has_ldap_integration\": {\r",
+							"            \"title\": \"Integration with Active Directory (AD)\",\r",
+							"            \"default\": false,\r",
+							"            \"enum\": [false, true],\r",
+							"            \"examples\": [\r",
+							"                false\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/has_ldap_integration\",\r",
+							"            \"type\": \"boolean\"\r",
+							"        },\r",
+							"        \"username\": {\r",
+							"            \"title\": \"User's login\",\r",
+							"            \"default\": \"\",\r",
+							"            \"pattern\": `^${pm.globals.get(\"login\")}$`,\r",
+							"            \"enum\": [`${pm.globals.get(\"login\")}`],\r",
+							"            \"examples\": [\r",
+							"                \"YarPl\"\r",
+							"            ],\r",
+							"            \"$id\": \"#/properties/username\",\r",
+							"            \"type\": \"string\"\r",
+							"        }\r",
+							"    },\r",
+							"    \"$id\": \"/api/oauth/token\",\r",
+							"    \"type\": \"object\",\r",
+							"    \"additionalProperties\": false,\r",
+							"    \"definitions\": {},\r",
+							"    \"$schema\": \"http://json-schema.org/draft/2020-12/json-schema-validation.html\"\r",
+							"    \r",
+							"}\r",
+							"\r",
+							"\r",
+							"/* --- TESTS --- */\r",
+							"\r",
+							"pm.test(`Check the active environment is \"authorization\"`, () => {\r",
+							"  pm.expect(pm.environment.name).to.eql(\"authorization\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Successful POST request! Status code is 200\", function () {\r",
+							"    pm.response.to.have.status(200);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Status code is \"OK\"`, function () {\r",
+							"    pm.response.to.have.status(\"OK\");\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response time is less than 5000ms\", function () {\r",
+							"    pm.expect(pm.response.responseTime).to.be.below(5000);\r",
+							"});\r",
+							"\r",
+							"pm.test('Schema \"token\" is valid', function() {\r",
+							"  pm.expect(tv4.validate(body, token_schema)).to.be.true;\r",
+							"});\r",
+							"\r",
+							"pm.test(\"Response body is an object that has all expected keys\", function () {\r",
+							"\r",
+							"    let storageTank = Object.keys(body).filter(function(key) {\r",
+							"        return !expected_keys_in_response_body.includes(key) \r",
+							"    }); \r",
+							"           \r",
+							"    if (storageTank.length !== 0) {\r",
+							"        console.log(`Actual keys received in response did not meet the expected. Unexpected keys: ${storageTank}`)\r",
+							"    }\r",
+							"    \r",
+							"    pm.expect(body).to.be.an('object').that.has.all.keys(expected_keys_in_response_body);\r",
+							"\r",
+							"    pm.expect(storageTank.length).to.eql(0);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Response body has length of ${expected_keys_in_response_body.length}`, function () {\r",
+							"    pm.expect(Object.keys(body)).to.have.lengthOf(expected_keys_in_response_body.length);\r",
+							"});\r",
+							"\r",
+							"pm.test(`\"token_type' is 'Bearer\"`, function () {\r",
+							"    pm.expect(body.token_type).to.eql(\"Bearer\");\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"expires_in\" key is a number greater than zero`, function () {\r",
+							"    pm.expect(body.expires_in).to.be.a('number');\r",
+							"    pm.expect(body.expires_in).to.be.above(0);\r",
+							"    pm.expect(body.expires_in).to.be.above(43199);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"access_token\" key is not an empty string`, function () {\r",
+							"    pm.expect(body.access_token).to.be.a('string');\r",
+							"    pm.expect(body.access_token.length).to.be.above(0);\r",
+							"    pm.expect(body.access_token.length).to.be.above(955);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"refresh_token\" key is not an empty string`, function () {\r",
+							"    pm.expect(body.refresh_token).to.be.a('string');\r",
+							"    pm.expect(body.refresh_token.length).to.be.eql(712);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"require_new_password\" key is a boolean`, function () {\r",
+							"    pm.expect(body.require_new_password).to.be.a('boolean');\r",
+							"    pm.expect(body.require_new_password).to.be.oneOf([true, false]);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"has_ldap_integration\" key is a boolean`, function () {\r",
+							"    pm.expect(body.has_ldap_integration).to.be.a('boolean');\r",
+							"    pm.expect(body.has_ldap_integration).to.be.oneOf([true, false]);\r",
+							"});\r",
+							"\r",
+							"pm.test(`Key \"username\" has expected value`, function () {\r",
+							"    pm.expect(body.username).to.be.a('string');\r",
+							"    pm.expect(body.username).to.be.eql(pm.globals.get(\"login\"));\r",
+							"});\r",
+							"\r",
+							"pm.test(`Value of \"access_token\" key was recorded to the global collection`, function () {\r",
+							"    pm.globals.set(\"access_token\", body.access_token);\r",
+							"    pm.expect(pm.globals.get(\"access_token\")).to.be.eql(body.access_token);\r",
+							"});"
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [
+					{
+						"key": "authority",
+						"value": "{{authority}}"
+					},
+					{
+						"key": "pragma",
+						"value": "no-cache"
+					},
+					{
+						"key": "cache-control",
+						"value": "no-cache"
+					},
+					{
+						"key": "sec-ch-ua",
+						"value": "\"Chromium\";v=\"92\", \" Not A;Brand\";v=\"99\", \"Google Chrome\";v=\"92\""
+					},
+					{
+						"key": "accept",
+						"value": "application/json, text/plain, */*"
+					},
+					{
+						"key": "sec-ch-ua-mobile",
+						"value": "?0"
+					},
+					{
+						"key": "user-agent",
+						"value": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/92.0.4515.131 Safari/537.36"
+					},
+					{
+						"key": "content-type",
+						"value": "application/json;charset=UTF-8"
+					},
+					{
+						"key": "origin",
+						"value": "{{origin}}"
+					},
+					{
+						"key": "sec-fetch-site",
+						"value": "same-origin"
+					},
+					{
+						"key": "sec-fetch-mode",
+						"value": "cors"
+					},
+					{
+						"key": "sec-fetch-dest",
+						"value": "empty"
+					},
+					{
+						"key": "referer",
+						"value": "{{referer}}"
+					},
+					{
+						"key": "accept-language",
+						"value": "ru,de;q=0.9,uk;q=0.8,hr;q=0.7,hu;q=0.6,en;q=0.5,en-AU;q=0.4,en-GB-oxendict;q=0.3,en-GB;q=0.2,en-IN;q=0.1,en-CA;q=0.1,en-NZ;q=0.1,en-US;q=0.1,en-ZA;q=0.1"
+					},
+					{
+						"key": "cookie",
+						"value": "{{cookie}}"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"grant_type\": \"password\",\r\n    \"client_id\": \"2\",\r\n    \"client_secret\": \"{{client_secret}}\",\r\n    \"username\": \"{{login}}\",\r\n    \"password\": \"{{password}}\"\r\n}"
+				},
+				"url": {
+					"raw": "{{request_url}}/api/oauth/token",
+					"host": [
+						"{{request_url}}"
+					],
+					"path": [
+						"api",
+						"oauth",
+						"token"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

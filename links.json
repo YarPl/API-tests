@@ -1,0 +1,25 @@
+[
+    {
+        "collection":  "./postman_tests/1_authorization.postman_collection.json",
+        "environment": "./postman_tests/environments/1_authorization.postman_environment.json",
+        "globals":     "./postman_tests/environments/global/bridge.json"
+    },
+    
+    {
+        "collection":  "./postman_tests/2_new_counterparty.postman_collection.json",
+        "environment": "./postman_tests/environments/2_new_counterparty.postman_environment.json",
+        "globals":     "./postman_tests/environments/global/bridge.json"
+    },
+    
+    {
+        "collection":  "./postman_tests/3_editing_counterparty_overview.postman_collection.json",
+        "environment": "./postman_tests/environments/3_editing_counterparty_overview.postman_environment.json",
+        "globals":     "./postman_tests/environments/global/bridge.json"
+    },
+    
+    {
+        "collection":  "./postman_tests/4_import.postman_collection.json",
+        "environment": "./postman_tests/environments/4_import.postman_environment.json",
+        "globals":     "./postman_tests/environments/global/bridge.json"
+    }
+]

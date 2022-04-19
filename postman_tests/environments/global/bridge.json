@@ -1,0 +1,39 @@
+{
+	"id": "6037e0fe-a24c-47bc-8f51-26aa6c712ac8",
+	"values": [
+		{
+			"key": "project",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "host",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "login",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "password",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "client_secret",
+			"value": "",
+			"enabled": true
+		},
+		{
+			"key": "cookie",
+			"value": "",
+			"enabled": true
+		}
+	],
+	"name": "Globals",
+	"_postman_variable_scope": "globals",
+	"_postman_exported_at": "2021-11-01T09:59:01.173Z",
+	"_postman_exported_using": "Postman/9.1.3"
+}

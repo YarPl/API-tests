@@ -1,0 +1,21 @@
+﻿Устанавливаем:
+
+1. allure (например, через scoop)
+2. newman и newman-reporter-allure посредством npm в папку проекта
+
+
+Все команды выполняются из корневой директории проекта:
+
+1. node newman.js
+2. allure generate --clean allure-results
+3. allure open allure-report
+
+
+Примечания:
+
+1. Найти возможность проганять несколько коллекций одним скриптом (рассмотреть newman-run)
+2. https://www.npmjs.com/package/allure-commandline пакет для автоматической генерации данных для allure
+
+
+
+866 (кодировка русского текста DOS), 1251 (кодировка русского текста Windows), 65001 (UTF-8).
